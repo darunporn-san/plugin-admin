@@ -1,28 +1,27 @@
-import React from "react";
-import clsx from "clsx";
+"use client";
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary" | "outline";
+import * as React from "react";
+import { Button as ShadcnButton, buttonVariants } from "@/components/ui/button"; // relative path
+import { cn } from "@/lib/utils"; // utility ของคุณ
+
+export type CustomButtonProps = React.ComponentProps<typeof ShadcnButton> & {
+  highlight?: boolean; // custom style example
 };
 
-export const Button = ({
-  variant = "primary",
-  className,
-  children,
-  ...props
-}: ButtonProps) => {
-  const base =
-    "px-4 py-2 rounded-lg font-medium transition active:scale-95 disabled:opacity-50";
+export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
+  ({ className, highlight, ...props }, ref) => {
+    return (
+      <ShadcnButton
+        ref={ref}
+        className={cn(
+          buttonVariants({ variant: props.variant }),
+          highlight && "ring-2 ring-yellow-400",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
 
-  const variants: Record<string, string> = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    secondary: "bg-gray-200 text-gray-900 hover:bg-gray-300",
-    outline: "border border-gray-400 text-gray-700 hover:bg-gray-100",
-  };
-
-  return (
-    <button className={clsx(base, variants[variant], className)} {...props}>
-      {children}
-    </button>
-  );
-};
+CustomButton.displayName = "CustomButton";
