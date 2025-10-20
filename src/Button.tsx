@@ -5,7 +5,7 @@ import { Button as ShadcnButton, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils"; // utility ของคุณ
 
 export type CustomButtonProps = React.ComponentProps<typeof ShadcnButton> & {
-  highlight?: boolean; // custom style example
+  highlight?: boolean;
 };
 
 export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
