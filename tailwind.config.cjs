@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./src/**/*.{ts,tsx,js,jsx}",                  // ครอบทั้ง src
-    "./node_modules/@shadcn/ui/**/*.{ts,tsx,js,jsx}" // สำหรับ shadcn/ui
+    "./node_modules/shadcn/**/*.{ts,tsx,js,jsx}" // สำหรับ shadcn/ui
   ],
   theme: {
     extend: {},
