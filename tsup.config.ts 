@@ -1,0 +1,7 @@
+// tsup.config.ts
+export default defineConfig({
+  entry: ["src/index.ts"],
+  format: ["esm", "cjs"],
+  minify: false, // ❌ อย่า minify
+  dts: true,
+});
