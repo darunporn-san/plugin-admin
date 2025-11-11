@@ -1,5 +1,6 @@
 // src/Button.tsx
 import * as React2 from "react";
+import { Slot as Slot2 } from "@radix-ui/react-slot";
 
 // src/components/ui/button.tsx
 import * as React from "react";
@@ -72,16 +73,16 @@ Button.displayName = "Button";
 // src/Button.tsx
 import { jsx as jsx2 } from "react/jsx-runtime";
 var CustomButton = React2.forwardRef(
-  ({ className, highlight, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, highlight, ...props }, ref) => {
+    const Comp = asChild ? Slot2 : "button";
     return /* @__PURE__ */ jsx2(
-      Button,
+      Comp,
       {
-        ref,
         className: cn(
-          buttonVariants({ variant: props.variant }),
-          highlight && "ring-2 ring-yellow-400",
-          className
+          buttonVariants({ variant, size, className }),
+          highlight && "ring-2 ring-yellow-400"
         ),
+        ref,
         ...props
       }
     );

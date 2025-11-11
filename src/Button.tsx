@@ -1,23 +1,33 @@
 "use client";
 
 import * as React from "react";
-import { Button as ShadcnButton, buttonVariants } from "@/components/ui/button"; // relative path
-import { cn } from "@/lib/utils"; // utility ของคุณ
+import { Slot } from "@radix-ui/react-slot";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-export type CustomButtonProps = React.ComponentProps<typeof ShadcnButton> & {
+interface ButtonVariantProps {
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  size?: "default" | "sm" | "lg" | "icon";
+}
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    ButtonVariantProps {
+  asChild?: boolean;
   highlight?: boolean;
-};
+}
 
-export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
-  ({ className, highlight, variant, ...props }, ref) => {
+const CustomButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, highlight, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    
     return (
-      <ShadcnButton
-        ref={ref}
-        variant={variant}
+      <Comp
         className={cn(
-          highlight && "ring-2 ring-yellow-400",
-          className
+          buttonVariants({ variant, size, className }),
+          highlight && "ring-2 ring-yellow-400"
         )}
+        ref={ref}
         {...props}
       />
     );
@@ -25,3 +35,5 @@ export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProp
 );
 
 CustomButton.displayName = "CustomButton";
+
+export { CustomButton };

@@ -36,6 +36,7 @@ module.exports = __toCommonJS(index_exports);
 
 // src/Button.tsx
 var React2 = __toESM(require("react"));
+var import_react_slot2 = require("@radix-ui/react-slot");
 
 // src/components/ui/button.tsx
 var React = __toESM(require("react"));
@@ -108,16 +109,16 @@ Button.displayName = "Button";
 // src/Button.tsx
 var import_jsx_runtime2 = require("react/jsx-runtime");
 var CustomButton = React2.forwardRef(
-  ({ className, highlight, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, highlight, ...props }, ref) => {
+    const Comp = asChild ? import_react_slot2.Slot : "button";
     return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-      Button,
+      Comp,
       {
-        ref,
         className: cn(
-          buttonVariants({ variant: props.variant }),
-          highlight && "ring-2 ring-yellow-400",
-          className
+          buttonVariants({ variant, size, className }),
+          highlight && "ring-2 ring-yellow-400"
         ),
+        ref,
         ...props
       }
     );
