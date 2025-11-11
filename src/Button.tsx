@@ -9,12 +9,12 @@ export type CustomButtonProps = React.ComponentProps<typeof ShadcnButton> & {
 };
 
 export const CustomButton = React.forwardRef<HTMLButtonElement, CustomButtonProps>(
-  ({ className, highlight, ...props }, ref) => {
+  ({ className, highlight, variant, ...props }, ref) => {
     return (
       <ShadcnButton
         ref={ref}
+        variant={variant}
         className={cn(
-          buttonVariants({ variant: props.variant }),
           highlight && "ring-2 ring-yellow-400",
           className
         )}
